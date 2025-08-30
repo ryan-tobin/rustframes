@@ -17,8 +17,8 @@ Rustframes aims to become the **foundational data & array library for Rust**, mu
 
 ## Features (WIP)
 [X]- N-dimensional arrays (`Array`)<br>
-[X] - Basic arithmetic & broadcasting
-[X] - DataFrame & Series abstractions
+[X] - Basic arithmetic & broadcasting <br>
+[X] - DataFrame & Series abstractions <br>
 [X] - CSV I/O <br>
 [ ] - GroupBy & joins<br>
 [ ] - Arrow backend<br>
