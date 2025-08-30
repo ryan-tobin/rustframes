@@ -1,5 +1,5 @@
 use super::Array;
-use std::ops::{Add, Sub, Mul, Div};
+use std::ops::{Add, Div, Mul, Sub};
 
 impl<'a> Add for &'a Array<f64> {
     type Output = Array<f64>;

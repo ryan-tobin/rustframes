@@ -19,6 +19,8 @@ impl DataFrame {
             series.push(Series::Utf8(col));
         }
 
-        Ok(DataFrame::new(headers.iter().map(|h| h.to_string()).zip(series).collect()))
+        Ok(DataFrame::new(
+            headers.iter().map(|h| h.to_string()).zip(series).collect(),
+        ))
     }
 }

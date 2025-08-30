@@ -5,11 +5,9 @@ fn main() {
     let b = Array::<f64>::ones((2, 2));
     let c = &a + &b;
 
-
     println!("Array a: {:?}", a);
     println!("Array b: {:?}", b);
     println!("a + b = {:?}", c);
-
 
     let d = a.dot(&b);
     println!("a.dot(b) = {:?}", d);

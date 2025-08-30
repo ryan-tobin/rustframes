@@ -9,7 +9,10 @@ pub struct DataFrame {
 impl DataFrame {
     pub fn new(columns: Vec<(String, Series)>) -> Self {
         let (names, series): (Vec<_>, Vec<_>) = columns.into_iter().unzip();
-        DataFrame { columns: names, data: series }
+        DataFrame {
+            columns: names,
+            data: series,
+        }
     }
 
     pub fn head(&self, n: usize) -> Vec<(String, Series)> {
@@ -35,6 +38,9 @@ impl DataFrame {
                 new_data.push(self.data[pos].clone());
             }
         }
-        DataFrame { columns: new_cols, data: new_data }
+        DataFrame {
+            columns: new_cols,
+            data: new_data,
+        }
     }
 }

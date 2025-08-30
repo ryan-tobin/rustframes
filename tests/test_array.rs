@@ -39,9 +39,10 @@ fn dataframe_head_select() {
 
 #[test]
 fn dataframe_groupby_count() {
-    let df = DataFrame::new(vec![
-        ("group".to_string(), Series::from(vec!["a", "b", "a", "c", "b"])),
-    ]);
+    let df = DataFrame::new(vec![(
+        "group".to_string(),
+        Series::from(vec!["a", "b", "a", "c", "b"]),
+    )]);
 
     let grouped = df.groupby_count("group");
     if let Series::Utf8(labels) = &grouped.data[0] {
