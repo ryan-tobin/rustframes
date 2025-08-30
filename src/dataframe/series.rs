@@ -15,6 +15,10 @@ impl Series {
             Series::Utf8(v) => v.len(),
         }
     }
+
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
 }
 
 impl From<Vec<i64>> for Series {

@@ -41,6 +41,12 @@ impl<T: Clone + Default> Array<T> {
     }
 }
 
+impl<T> Array<T> {
+    pub fn is_empty(&self) -> bool {
+        self.data.is_empty()
+    }
+}
+
 impl<T> Index<(usize, usize)> for Array<T> {
     type Output = T;
     fn index(&self, index: (usize, usize)) -> &Self::Output {

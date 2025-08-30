@@ -1,7 +1,7 @@
 use super::Array;
 use std::ops::{Add, Div, Mul, Sub};
 
-impl<'a> Add for &'a Array<f64> {
+impl Add for &Array<f64> {
     type Output = Array<f64>;
     fn add(self, rhs: Self) -> Self::Output {
         assert_eq!(self.shape, rhs.shape);
@@ -15,7 +15,7 @@ impl<'a> Add for &'a Array<f64> {
     }
 }
 
-impl<'a> Sub for &'a Array<f64> {
+impl Sub for &Array<f64> {
     type Output = Array<f64>;
     fn sub(self, rhs: Self) -> Self::Output {
         assert_eq!(self.shape, rhs.shape);
@@ -29,7 +29,7 @@ impl<'a> Sub for &'a Array<f64> {
     }
 }
 
-impl<'a> Mul for &'a Array<f64> {
+impl Mul for &Array<f64> {
     type Output = Array<f64>;
     fn mul(self, rhs: Self) -> Self::Output {
         assert_eq!(self.shape, rhs.shape);
@@ -43,7 +43,7 @@ impl<'a> Mul for &'a Array<f64> {
     }
 }
 
-impl<'a> Div for &'a Array<f64> {
+impl Div for &Array<f64> {
     type Output = Array<f64>;
     fn div(self, rhs: Self) -> Self::Output {
         assert_eq!(self.shape, rhs.shape);
