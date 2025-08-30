@@ -4,5 +4,5 @@ use rustframes::dataframe::DataFrame;
 fn test_dataframe_head() {
     let df = DataFrame::from_csv("tests/data/test.csv").unwrap();
     let head = df.head(2);
-    assert_eq!(head[0].1.len(), 2);
+    assert_eq!(head.data.len(), 2);
 }

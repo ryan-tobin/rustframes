@@ -3,8 +3,8 @@ use rustframes::dataframe::{DataFrame, Series};
 
 #[test]
 fn array_addition() {
-    let a = Array::from_vec(vec![1.0, 2.0, 3.0, 4.0], (2, 2));
-    let b = Array::<f64>::ones((2, 2));
+    let a = Array::from_vec(vec![1.0, 2.0, 3.0, 4.0], vec![2, 2]);
+    let b = Array::<f64>::ones(vec![2, 2]);
     let c = &a + &b;
 
     assert_eq!(c[(0, 0)], 2.0);
@@ -13,8 +13,8 @@ fn array_addition() {
 
 #[test]
 fn array_dot() {
-    let a = Array::from_vec(vec![1.0, 2.0, 3.0, 4.0], (2, 2));
-    let b = Array::<f64>::ones((2, 2));
+    let a = Array::from_vec(vec![1.0, 2.0, 3.0, 4.0], vec![2, 2]);
+    let b = Array::<f64>::ones(vec![2, 2]);
     let d = a.dot(&b);
 
     assert_eq!(d[(0, 0)], 3.0);
@@ -29,8 +29,8 @@ fn dataframe_head_select() {
     ]);
 
     let head = df.head(2);
-    assert_eq!(head[0].1.len(), 2);
-    assert_eq!(head[1].1.len(), 2);
+    assert_eq!(head.data[0].len(), 2);
+    assert_eq!(head.data[1].len(), 2);
 
     let selected = df.select(&["y"]);
     assert_eq!(selected.columns, vec!["y".to_string()]);
