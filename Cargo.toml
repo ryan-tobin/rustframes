@@ -1,0 +1,14 @@
+[package]
+name = "rustframes"
+version = "0.1.0"
+edition = "2021"
+authors = ["Ryan Tobin <ryantobin119@gmail.com>"]
+description = "A blazing-fast, memory-safe alternative to NumPy + Pandas, written in Rust."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/ryan-tobin/rustframes"
+documentation = "https://docs.rs/rustframes"
+readme = "README.md"
+keywords = ["dataframe", "numpy", "pandas", "rust", "array"]
+categories = ["data-structures", "science", "mathematics"]
+
+[dependencies]
