@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="logo/RustFrames.svg" alt="RustFrames" width="280">
+</div>
+
 # RustFrames
 
 *A blazing fast, memory-safe alternative to NumPy + Pandas, written in Rust*
