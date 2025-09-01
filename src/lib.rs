@@ -47,7 +47,7 @@
 //! let grouped = df.groupby("age").mean();
 //!
 //! // I/O
-//! let df_from_csv = DataFrame::from_csv("data.csv")?;
+//! let df_from_csv = DataFrame::from_csv("tests/data/test.csv")?;
 //! df.to_csv("output.csv")?;
 //! # Ok::<(), Box<dyn std::error::Error>>(())
 
