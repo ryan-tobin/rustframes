@@ -5,6 +5,9 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufReader, BufWriter};
 
+#[derive(Debug)]
+pub struct BoolParseError;
+
 impl DataFrame {
     /// Read CSV with automatic type inference
     pub fn from_csv(path: &str) -> Result<Self, Box<dyn std::error::Error>> {
@@ -297,7 +300,7 @@ impl DataFrame {
     }
 
     /// Infer the type of a column from string data
-    fn infer_column_type(data: &[String]) -> SeriesType {
+    pub fn infer_column_type(data: &[String]) -> SeriesType {
         if data.is_empty() {
             return SeriesType::Utf8;
         }
@@ -336,11 +339,11 @@ impl DataFrame {
     }
 
     /// Parse boolean from string
-    fn parse_bool(s: &str) -> Result<bool, ()> {
+    pub fn parse_bool(s: &str) -> Result<bool, BoolParseError> {
         match s.to_lowercase().as_str() {
             "true" | "t" | "yes" | "y" | "1" => Ok(true),
             "false" | "f" | "no" | "n" | "0" => Ok(false),
-            _ => Err(()),
+            _ => Err(BoolParseError),
         }
     }
 }

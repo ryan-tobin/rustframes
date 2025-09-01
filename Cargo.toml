@@ -1,31 +1,192 @@
 [package]
-name = "rustframes"
-version = "0.1.0"
+name = "RustFrames"
+version = "0.2.0"
 edition = "2021"
 authors = ["Ryan Tobin <ryantobin119@gmail.com>"]
-description = "A blazing-fast, memory-safe alternative to NumPy + Pandas, written in Rust."
 license = "MIT OR Apache-2.0"
+description = "A blazing-fast, memory-safe alternative to NumPy + Pandas, written in Rust"
+homepage = "https://github.com/ryan-tobin/rustframes"
 repository = "https://github.com/ryan-tobin/rustframes"
 documentation = "https://docs.rs/rustframes"
 readme = "README.md"
-keywords = ["dataframe", "numpy", "pandas", "rust", "array"]
-categories = ["data-structures", "science", "mathematics"]
+keywords = ["dataframe", "numpy", "pandas", "linear-algebra", "data-science"]
+categories = ["data-structures", "mathematics", "science"]
+rust-version = "1.70"
 
-[dependencies]
-csv = "1.3.1"
-num-traits = "0.2.19"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-
-[dev-dependencies]
-criterion = "0.5"
-tempfile = "3.0"
-
-[[bench]]
-name = "array_bench"
-harness = false
+[lib]
+name = "rustframes"
+crate-type = ["cdylib", "rlib"]
 
 [features]
-default = []
+default = ["std", "csv", "json"]
+
+# Core features
+std = []
+alloc = []
+
+# I/O formats
+csv = ["dep:csv", "dep:serde"]
+json = ["dep:serde_json", "dep:serde"]
+parquet = []
+arrow = []
+excel = ["dep:calamine"]
+
+# Performance features
 simd = []
-gpu = []
+parallel = []
+mimalloc = ["dep:mimalloc"]
+jemalloc = ["dep:jemallocator"]
+
+# GPU acceleration
+cuda = ["dep:cudarc", "dep:half"]
+rocm = ["dep:hip-rs", "dep:rocm-rs"]
+metal = ["dep:metal", "dep:objc2-metal-performance-shaders"]
+opencl = ["dep:opencl3"]
+
+# Python integration
+python = ["dep:pyo3", "dep:numpy"]
+python-abi3 = ["python", "pyo3/abi3"]
+
+# Advanced features
+polars-compat = ["dep:polars-core", "dep:polars-lazy"]
+datafusion = ["dep:datafusion", "dep:tokio"]
+duckdb = ["dep:duckdb", "dep:duckdb-loadable-macros"]
+compression = ["dep:zstd", "dep:lz4", "dep:snap"]
+networking = ["dep:reqwest", "dep:tokio"]
+plotting = ["dep:plotters", "dep:plotters-backend"]
+ml = ["dep:linfa", "dep:ndarray", "dep:smartcore"]
+
+# Development and testing
+benchmarks = ["dep:criterion", "dep:pprof"]
+docs = ["dep:doc-comment"]
+
+[dependencies]
+# Core dependencies
+num-traits = "0.2"
+thiserror = "2.0.16"
+serde = { version = "1.0", features = ["derive"], optional = true }
+
+# I/O dependencies
+csv = { version = "1.3", optional = true }
+serde_json = { version = "1.0", optional = true }
+arrow = { version = "56.1.0", features = ["csv", "json", "ipc"] }
+arrow-flight = { version = "56.1.0", optional = true }
+parquet = { version = "56.1.0", features = ["arrow", "async"] }
+calamine = { version = "0.30.0", optional = true }
+
+# Performance dependencies
+rayon = { version = "1.11.0"}
+wide = { version = "0.7"}
+mimalloc = { version = "0.1", optional = true }
+jemallocator = { version = "0.5", optional = true }
+
+# GPU dependencies
+cudarc = { version = "0.17.3", optional = true, features = ["cublas", "curand"] }
+hip-rs = { version = "1.0.0", optional = true }
+rocm-rs = { version = "0.3.3", optional = true }
+metal = { version = "0.32.0", optional = true }
+objc2-metal-performance-shaders = { version = "0.3.1", optional = true }
+opencl3 = { version = "0.12.0", optional = true }
+half = { version = "2.3", optional = true }
+
+# Python integration
+pyo3 = { version = "0.26.0", optional = true, features = ["extension-module", "abi3"] }
+numpy = { version = "0.26.0", optional = true }
+
+# Memory mapping
+memmap2 = "0.9"
+tempfile = "3.8"
+
+# Random number generation
+rand = { version = "0.9.2", features = ["small_rng"] }
+
+# Compression
+zstd = { version = "0.13", optional = true }
+lz4 = { version = "1.24", optional = true }
+snap = { version = "1.1", optional = true }
+
+# Networking
+reqwest = { version = "0.12.23", optional = true, features = ["json", "stream"] }
+tokio = { version = "1.0", optional = true, features = ["full"] }
+
+# Advanced integrations
+polars-core = { version = "0.50.0", optional = true }
+polars-lazy = { version = "0.50.0", optional = true }
+datafusion = { version = "49.0.2", optional = true }
+duckdb = { version = "1.3.2", optional = true, features = ["bundled"] }
+duckdb-loadable-macros = { version = "0.1", optional = true }
+
+# Machine learning
+linfa = { version = "0.7", optional = true }
+ndarray = { version = "0.16.1", optional = true }
+smartcore = { version = "0.4.2", optional = true }
+
+# Plotting
+plotters = { version = "0.3", optional = true }
+plotters-backend = { version = "0.3", optional = true }
+
+criterion = { version = "0.7.0", features = ["html_reports"], optional = true}
+pprof = { version = "0.15.0", features = ["criterion", "flamegraph"], optional = true }
+doc-comment = { version = "0.3", optional = true }
+
+[dev-dependencies]
+proptest = "1.4"
+quickcheck = "1.0"
+approx = "0.5"
+tempfile = "3.8"
+
+# Integration test dependencies
+polars = { version = "0.50.0", features = ["lazy", "json"] }
+ndarray = { version = "0.16.1", features = ["blas"] }
+
+[build-dependencies]
+pyo3-build-config = { version = "0.26.0", optional = true }
+
+[[bench]]
+name = "array_benchmarks"
+harness = false
+required-features = ["benchmarks"]
+
+[[bench]]
+name = "dataframe_benchmarks"
+harness = false
+required-features = ["benchmarks"]
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[profile.bench]
+opt-level = 3
+debug = true
+lto = "thin"
+
+[profile.dev]
+opt-level = 1
+debug = true
+split-debuginfo = "unpacked"
+
+[package.metadata.docs.rs]
+features = ["std", "csv", "json", "arrow", "parallel", "simd"]
+rustdoc-args = ["--cfg", "docsrs"]
+
+[workspace.dependencies]
+# Shared dependencies across workspace
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "2.0.16"
+num-traits = "0.2"
+
+[package.metadata.release]
+pre-release-replacements = [
+    {file="README.md", search="rustframes = \"[^\"]+\"", replace="rustframes = \"{{version}}\""},
+    {file="src/lib.rs", search="//! Version: [^\\n]+", replace="//! Version: {{version}}"},
+]
+
+# Python extension specific configuration
+features = ["python"]
+module-name = "rustframes._rustframes"
+python-source = "python"
+strip = true
