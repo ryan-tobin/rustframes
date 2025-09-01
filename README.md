@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="logo/RustFrames.svg" alt="RustFrames" width="280">
+  <img src="logo/RustFrames.svg" alt="RustFrames" width="820">
 </div>
 
 # RustFrames
