@@ -332,10 +332,7 @@ impl DataFrame {
         let mut right_map: HashMap<String, Vec<usize>> = HashMap::new();
         if let Series::Utf8(right_values) = &other.data[right_col_idx] {
             for (idx, value) in right_values.iter().enumerate() {
-                right_map
-                    .entry(value.clone())
-                    .or_default()
-                    .push(idx);
+                right_map.entry(value.clone()).or_default().push(idx);
             }
         }
 
@@ -377,10 +374,7 @@ impl DataFrame {
         }
 
         // Convert result to DataFrame
-        let result_series: Vec<Series> = result_data
-            .into_iter()
-            .map(Series::Utf8)
-            .collect();
+        let result_series: Vec<Series> = result_data.into_iter().map(Series::Utf8).collect();
 
         DataFrame {
             columns: result_columns,

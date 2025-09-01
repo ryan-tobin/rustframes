@@ -21,34 +21,22 @@ impl<'a> GroupBy<'a> {
         match &df.data[col_idx] {
             Series::Utf8(values) => {
                 for (idx, value) in values.iter().enumerate() {
-                    groups
-                        .entry(value.clone())
-                        .or_default()
-                        .push(idx);
+                    groups.entry(value.clone()).or_default().push(idx);
                 }
             }
             Series::Int64(values) => {
                 for (idx, &value) in values.iter().enumerate() {
-                    groups
-                        .entry(value.to_string())
-                        .or_default()
-                        .push(idx);
+                    groups.entry(value.to_string()).or_default().push(idx);
                 }
             }
             Series::Float64(values) => {
                 for (idx, &value) in values.iter().enumerate() {
-                    groups
-                        .entry(value.to_string())
-                        .or_default()
-                        .push(idx);
+                    groups.entry(value.to_string()).or_default().push(idx);
                 }
             }
             Series::Bool(values) => {
                 for (idx, &value) in values.iter().enumerate() {
-                    groups
-                        .entry(value.to_string())
-                        .or_default()
-                        .push(idx);
+                    groups.entry(value.to_string()).or_default().push(idx);
                 }
             }
         }
@@ -340,10 +328,7 @@ impl<'a> GroupBy<'a> {
             }
         }
 
-        let result_series: Vec<Series> = result_data
-            .into_iter()
-            .map(Series::Utf8)
-            .collect();
+        let result_series: Vec<Series> = result_data.into_iter().map(Series::Utf8).collect();
 
         DataFrame {
             columns: self.df.columns.clone(),
@@ -369,10 +354,7 @@ impl<'a> GroupBy<'a> {
             }
         }
 
-        let result_series: Vec<Series> = result_data
-            .into_iter()
-            .map(Series::Utf8)
-            .collect();
+        let result_series: Vec<Series> = result_data.into_iter().map(Series::Utf8).collect();
 
         DataFrame {
             columns: self.df.columns.clone(),
