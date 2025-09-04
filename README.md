@@ -8,7 +8,7 @@
 
 [![CI](https://github.com/ryan-tobin/rustframes/actions/workflows/ci.yml/badge.svg)](https://github.com/ryan-tobin/rustframes/actions/workflows/ci.yml)
 [![Crates.io](https://img.shields.io/crates/v/rustframes.svg)](https://crates.io/crates/rustframes)
-[![Docs.rs](https://docs.rs/rustframes/badge.svg)](https://docs.rs/crate/RustFrames/latest)
+![docs.rs](https://img.shields.io/docsrs/RustFrames)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE)
 
 ## Overview
