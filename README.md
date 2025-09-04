@@ -6,9 +6,12 @@
 
 *A blazing fast, memory-safe alternative to NumPy + Pandas, written in Rust*
 
+![Rust](https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white)
 [![CI](https://github.com/ryan-tobin/rustframes/actions/workflows/ci.yml/badge.svg)](https://github.com/ryan-tobin/rustframes/actions/workflows/ci.yml)
 [![Crates.io](https://img.shields.io/crates/v/rustframes.svg)](https://crates.io/crates/rustframes)
-![docs.rs](https://img.shields.io/docsrs/RustFrames)
+![docs.rs (with version)](https://img.shields.io/docsrs/RustFrames/1.0.0)
+![Crates.io Size (version)](https://img.shields.io/crates/size/RustFrames/1.0.0)
+![Crates.io MSRV (version)](https://img.shields.io/crates/msrv/RustFrames/1.0.0)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE)
 
 ## Overview
